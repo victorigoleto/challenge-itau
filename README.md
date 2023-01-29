@@ -36,6 +36,9 @@ Output: Um boolean indicando se a senha é válida.
 
 Embora nossas aplicações sejam escritas em Kotlin e C# (.net core), você não precisa escrever sua solução usando elas. Use a linguagem de programação que considera ter mais 
 
+## 🎯Solução
+Meu plano A de ínicio era montar uma aplicação web com a presença de 2 camadas: front-end e back-end, mas como se tratava de um case de apenas de validação tomei a decisão de focar apenas no back-end. Então fui para o plano B, pesquisar formas de realizar essa valiadação e achei muitas formas mas a que eu implementei foi a mais valida e prática: <b>regex</b>. Outro ponto importante é que o metodo de requisição POST foi utilizado ao invés do GET, pois uma senha geralmente não se consulta e sim cadastra respeitando questões de segurança.
+
 ## 🚀Tecnologias Utilizadas
 <p>• Java 11</p>
 <p>• Spring Boot</p>
