@@ -1,6 +1,6 @@
 # Challenge-itau
 <img src="https://i.imgur.com/Dsf5i8E.png">
-Projeto desenvolvido para o processo seletivo do Banco Itaú, em que consiste em validar uma senha de acordo com algumas definições
+Projeto desenvolvido para o processo seletivo do Banco Itaú, em que consiste validar uma senha de acordo com algumas definições
 
 ## 📝Descrição
 Considere uma senha sendo válida quando a mesma possuir as seguintes definições:
