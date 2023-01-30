@@ -8,7 +8,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
-public class ValidationPasswordService {
+public class PasswordValidator {
 
     String REGEX_VALIDATOR = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()-+])(?:([0-9a-zA-Z!@#$%^&*()-+])(?!\\1)){9,}$";
 
@@ -17,13 +17,13 @@ public class ValidationPasswordService {
 
         validateCharacterDuplicate(passwordRequestDTO);
 
+        password.setPassword(passwordRequestDTO.getInput());
+
         if (passwordRequestDTO.getInput().matches(REGEX_VALIDATOR)) {
-            password.setInput(passwordRequestDTO.getInput());
-            password.setOutput(true);
+            password.setIsValid(true);
             return password;
         } else {
-            password.setInput(passwordRequestDTO.getInput());
-            password.setOutput(false);
+            password.setIsValid(false);
             return password;
         }
     }

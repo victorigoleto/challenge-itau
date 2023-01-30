@@ -17,19 +17,19 @@ public class Password {
     @Id
     private UUID id;
 
-    @Column(name = "PASSWORD", nullable = false, length = 100)
-    private String input;
+    @Column(name = "password", nullable = false, length = 100)
+    private String password;
 
-    @Column(name = "PASSWORD_STATUS", nullable = false, length = 6)
-    private Boolean output;
+    @Column(name = "status", nullable = false, length = 6)
+    private Boolean isValid;
+
+    public Password(String password, Boolean isValid) {
+        this.password = password;
+        this.isValid = isValid;
+    }
 
     @PrePersist
     public void prePersist() {
         this.id = UUID.randomUUID();
-    }
-
-    public Password(String input, Boolean output) {
-        this.input = input;
-        this.output = output;
     }
 }

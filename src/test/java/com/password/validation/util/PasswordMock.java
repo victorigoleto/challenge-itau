@@ -1,24 +1,23 @@
 package com.password.validation.util;
 
+import com.password.validation.dto.PasswordRequestDTO;
 import com.password.validation.entity.Password;
 
 public class PasswordMock {
 
-    public static Password toPasswordValid() {
-        Password password = new Password();
-
-        password.setInput("AbTp9!fok");
-        password.setOutput(true);
-
-        return password;
+    public static Password generatePasswordValid() {
+        return new Password("AbTp9!fok", true);
     }
 
-    public static Password toPasswordInvalid() {
-        Password password = new Password();
+    public static Password generatePasswordInvalid() {
+        return new Password("AbTp9 fok", false);
+    }
 
-        password.setInput("AbTp9 fok");
-        password.setOutput(false);
+    public static PasswordRequestDTO generateValidPasswordRequestDTO() {
+        return new PasswordRequestDTO("AbTp9!fok");
+    }
 
-        return password;
+    public static PasswordRequestDTO generateInvalidPasswordRequestDTO() {
+        return new PasswordRequestDTO("AbTp9 fok");
     }
 }

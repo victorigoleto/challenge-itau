@@ -9,14 +9,21 @@ import org.springframework.stereotype.Service;
 public class PasswordService {
 
     private final PasswordRepository passwordRepository;
-    private final ValidationPasswordService validationPasswordService;
+    private final PasswordValidator validationPasswordService;
 
-    public PasswordService(PasswordRepository passwordRepository, ValidationPasswordService validationPasswordService) {
+    public PasswordService(PasswordRepository passwordRepository, PasswordValidator validationPasswordService) {
         this.passwordRepository = passwordRepository;
         this.validationPasswordService = validationPasswordService;
     }
 
-    public Password validatePassword(PasswordRequestDTO passwordRequestDTO) {
-        return passwordRepository.save(validationPasswordService.validate(passwordRequestDTO));
+    public boolean validatePassword(PasswordRequestDTO passwordRequestDTO) {
+        Password passwordValidated = validationPasswordService.validate(passwordRequestDTO);
+
+        if (passwordValidated.getIsValid()) {
+            passwordRepository.save(passwordValidated);
+            return true;
+        }
+
+        return false;
     }
 }

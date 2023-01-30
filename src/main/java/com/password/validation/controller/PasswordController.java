@@ -1,11 +1,10 @@
 package com.password.validation.controller;
 
 import com.password.validation.dto.PasswordRequestDTO;
-import com.password.validation.entity.Password;
+import com.password.validation.dto.PasswordResponseDTO;
 import com.password.validation.mapper.PasswordMapper;
 import com.password.validation.service.PasswordService;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,21 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class PasswordController {
 
     private final PasswordService passwordService;
+    private final PasswordMapper passwordMapper;
 
-    public PasswordController(PasswordService passwordService) {
+    public PasswordController(PasswordService passwordService, PasswordMapper passwordMapper) {
         this.passwordService = passwordService;
+        this.passwordMapper = passwordMapper;
     }
 
     @PostMapping(path = "/validation")
-    public ResponseEntity<?> validatePassword(@RequestBody @Valid PasswordRequestDTO passwordRequestDTO) {
+    public PasswordResponseDTO validatePassword(@RequestBody @Valid PasswordRequestDTO passwordRequestDTO) {
 
-        Password password = passwordService.validatePassword(passwordRequestDTO);
+        boolean isPasswordValid = passwordService.validatePassword(passwordRequestDTO);
 
-        if (password.getInput() != null) {
-            return ResponseEntity.ok(PasswordMapper.isValid(password));
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+        return passwordMapper.toDto(isPasswordValid);
 
     }
 }

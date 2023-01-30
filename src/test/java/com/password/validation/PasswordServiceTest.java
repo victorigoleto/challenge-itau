@@ -1,42 +1,49 @@
 package com.password.validation;
 
-import com.password.validation.entity.Password;
+import com.password.validation.repository.PasswordRepository;
 import com.password.validation.service.PasswordService;
-import com.password.validation.util.PasswordMock;
-import com.password.validation.util.PasswordRequestMock;
+import com.password.validation.service.PasswordValidator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static com.password.validation.util.PasswordMock.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-/*
-@SpringBootTest
+
+@ExtendWith(SpringExtension.class)
 class PasswordServiceTest {
+
+    @Mock
+    PasswordRepository passwordRepository;
+
+    @Mock
+    PasswordValidator passwordValidator;
 
     @InjectMocks
     PasswordService passwordService;
 
     @Test
-    void retornaSucessoComOutputTrue() {
-        when(passwordService.validatePassword(PasswordRequestMock.toPasswordRequestDTO())).thenReturn(any(Password.class));
+    void retornaSucessoComStatusTrue() {
+        when(passwordValidator.validate(any())).thenReturn(generatePasswordValid());
 
-        Password password = PasswordMock.toPasswordValid();
+        boolean response = passwordService.validatePassword(generateValidPasswordRequestDTO());
 
-        assertEquals("AbTp9!fok", password.getInput());
-        assertTrue(password.getOutput());
+        assertTrue(response);
     }
 
     @Test
-    void retornaSucessoComOutputFalse() {
-        when(passwordService.validatePassword(PasswordRequestMock.toPasswordRequestDTO())).thenReturn(PasswordMock.toPasswordInvalid());
+    void retornaSucessoComStatusFalse() {
+        when(passwordValidator.validate(any())).thenReturn(generatePasswordInvalid());
 
-        Boolean retorno = PasswordMock.toPasswordInvalid().getOutput();
+        boolean response = passwordService.validatePassword(generateInvalidPasswordRequestDTO());
 
-        assertFalse(retorno.booleanValue());
+        assertFalse(response);
     }
 
 }
-*/
