@@ -1,6 +1,5 @@
 package com.password.validation.mapper;
 
-import com.password.validation.dto.PasswordRequestDTO;
 import com.password.validation.dto.PasswordResponseDTO;
 import com.password.validation.entity.Password;
 import org.springframework.stereotype.Component;
@@ -13,5 +12,4 @@ public class PasswordMapper {
         passwordResponseDTO.setOutput(password.getOutput());
         return passwordResponseDTO;
     }
-
 }

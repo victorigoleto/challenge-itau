@@ -5,12 +5,13 @@ import com.password.validation.entity.Password;
 import com.password.validation.mapper.PasswordMapper;
 import com.password.validation.service.PasswordService;
 import jakarta.validation.Valid;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Log4j2
 @Validated
 @RestController
 @RequestMapping("/password")
@@ -25,13 +26,11 @@ public class PasswordController {
     @PostMapping(path = "/validation")
     public ResponseEntity<?> validatePassword(@RequestBody @Valid PasswordRequestDTO passwordRequestDTO) {
 
-        log.info("Inicianco consulta no controller PasswordController.validatePassword");
-
         Password password = passwordService.validatePassword(passwordRequestDTO);
 
-        if (password.getInput() != null ){
+        if (password.getInput() != null) {
             return ResponseEntity.ok(PasswordMapper.isValid(password));
-        }else {
+        } else {
             return ResponseEntity.badRequest().build();
         }
 
