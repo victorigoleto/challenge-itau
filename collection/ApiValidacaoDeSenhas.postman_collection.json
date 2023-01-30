@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "18f590e2-2742-454b-8a4d-5dc1943cce19",
+		"name": "ApiValidacaoDeSenhas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request com output true",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"input\":\"AbTp9!fok\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/password/validation",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"password",
+						"validation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request com output false",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"input\":\"AAAbbbCc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/password/validation",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"password",
+						"validation"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
